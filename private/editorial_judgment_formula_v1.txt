@@ -1,0 +1,330 @@
+AI Decision Hub Editorial Judgment Formula v1
+(Jasper Template Content Decision Logic)
+
+Purpose
+This document defines the editorial decision rules used to determine what content belongs in each section of the AI Decision Hub page template.
+
+It ensures that automation produces consistent, meaningful, decision-useful pages rather than vague summaries or marketing fluff.
+
+This is not the page structure spec.
+This is the editorial quality filter applied before content enters the page.
+
+General Editorial Principle
+Only include information that materially helps a reader decide whether they should consider using the tool.
+
+If a point does not improve that decision, it does not belong on the page.
+
+---------------------------------------------------------------------
+
+SECTION: Quick Verdict
+
+A. User Question
+“Is this tool worth considering at a glance?”
+
+B. Allowed Evidence
+Recurring user feedback patterns
+Consistent praise or criticism across multiple sources
+Workflow strengths or limitations
+Pricing/value signals
+
+C. Inclusion Threshold
+A bullet is strong enough if at least TWO of these apply:
+• Appears across multiple sources
+• Describes a concrete user outcome
+• Directly affects productivity or quality
+• Reflects a real workflow behavior
+
+D. Exclude
+Generic claims (“powerful AI tool”)
+Marketing language
+Feature descriptions with no usage context
+One-off opinions
+
+E. Writing Rules
+Bullet format
+Concrete language
+No filler adjectives
+Avoid hype
+
+F. Maximum Items
+Pros: 5 (target 3)
+Cons: 5 (target 3)
+
+G. Weak Example
+“Great AI writing features”
+
+H. Strong Example
+“Templates speed up repeatable marketing copy tasks”
+
+---------------------------------------------------------------------
+
+SECTION: Signal Sources
+
+A. User Question
+“Where did these patterns come from?”
+
+B. Allowed Evidence
+Categories of sources:
+• review platforms
+• SaaS blogs
+• user discussions
+• case studies
+
+C. Inclusion Threshold
+Source categories must represent environments where real users discuss the product.
+
+D. Exclude
+Vendor documentation
+Marketing pages
+Generic phrases like “internet research”
+
+E. Writing Rules
+Neutral language
+Category descriptions only
+Do not imply exhaustive coverage
+
+F. Maximum Items
+5 categories
+
+G. Weak Example
+“Various online reviews”
+
+H. Strong Example
+“Product review platforms (G2, Trustpilot, TrustRadius)”
+
+---------------------------------------------------------------------
+
+SECTION: Recurring User Signals
+
+A. User Question
+“What patterns appear repeatedly when people use this tool?”
+
+B. Allowed Evidence
+Multiple review sources
+Repeated feedback themes
+User quotes
+Workflow observations
+
+C. Inclusion Threshold
+A signal qualifies if at least TWO conditions apply:
+• Appears across multiple sources
+• Has both praise and criticism patterns
+• Reflects a real workflow behavior
+• Affects output quality or productivity
+
+D. Exclude
+Single complaints
+Marketing claims
+Feature lists without user context
+Redundant themes
+
+E. Writing Rules
+Theme = short phrase
+Descriptor = short qualifier
+Quotes must reflect real opinions
+Fit implications must explain who benefits or struggles
+
+F. Maximum Items
+4 signal themes
+
+Each theme:
+1–3 praise quotes
+1–3 critique quotes
+
+G. Weak Example
+Theme: “AI Writing”
+Descriptor: “Often mentioned”
+
+H. Strong Example
+Theme: “First Draft Speed”
+Descriptor: “Frequently reported”
+
+Praise: “Generates usable marketing drafts quickly”
+Critique: “Outputs still require heavy editing”
+
+---------------------------------------------------------------------
+
+SECTION: Best Fit / Not Ideal For
+
+A. User Question
+“Who should actually consider using this tool?”
+
+B. Allowed Evidence
+Recurring user patterns
+Workflow structure
+Pricing/value signals
+
+C. Inclusion Threshold
+Each item must identify:
+• a specific user type
+• a specific workflow scenario
+• a specific expectation
+
+D. Exclude
+Generic audiences (“businesses”, “creators”)
+Category-obvious statements
+Redundant bullets
+
+E. Writing Rules
+User-focused language
+Concrete scenarios
+Avoid marketing tone
+
+F. Maximum Items
+3 per column
+
+G. Weak Example
+Best Fit: “Content creators”
+
+H. Strong Example
+Best Fit: “Marketing teams producing repeatable blog and ad copy”
+
+---------------------------------------------------------------------
+
+SECTION: Typical Alternatives
+
+A. User Question
+“If someone didn’t choose this tool, what would they likely use instead?”
+
+B. Allowed Evidence
+Tools frequently compared in reviews
+Tools solving the same workflow problem
+
+C. Inclusion Threshold
+An alternative must be a realistic user substitute.
+
+D. Exclude
+Unrelated tools
+Obscure products not commonly compared
+Different problem categories
+
+E. Writing Rules
+Difference explains workflow contrast
+Best For describes user fit
+Avoid declaring winners
+
+F. Maximum Items
+4 alternatives
+
+G. Weak Example
+Difference: “Another AI tool”
+
+H. Strong Example
+Difference: “More flexible general AI assistant but less structured for marketing workflows”
+
+---------------------------------------------------------------------
+
+SECTION: Inside the Workflow
+
+A. User Question
+“What does using this tool actually feel like?”
+
+B. Allowed Evidence
+Workflow walkthroughs
+User descriptions
+UI process explanations
+Repeated friction points
+
+C. Inclusion Threshold
+Insights must describe:
+• user steps
+• where speed happens
+• where friction occurs
+
+D. Exclude
+Feature lists
+Generic praise
+Marketing copy
+Claims implying hands-on testing
+
+E. Writing Rules
+Narrative describes workflow flow
+Tradeoffs describe friction points
+Avoid “we tested” language
+
+F. Maximum Items
+Narrative: 1 paragraph
+Tradeoffs: 4 bullets
+
+G. Weak Example
+“Jasper is easy to use.”
+
+H. Strong Example
+“Users typically start by selecting a template, entering keywords, and generating a draft that is refined through multiple edits.”
+
+---------------------------------------------------------------------
+
+SECTION: Illustrative Output
+
+A. User Question
+“What type of output is this tool commonly used to produce?”
+
+B. Allowed Evidence
+Synthetic example prompts aligned with typical use cases.
+
+C. Inclusion Threshold
+Prompt must reflect a realistic task users perform.
+
+D. Exclude
+Benchmarks
+Testing claims
+Complex prompts unrelated to core workflow
+
+E. Writing Rules
+Clearly label as illustrative
+Never imply real testing
+Interpretation should explain editing expectations
+
+F. Maximum Items
+1 example
+
+G. Weak Example
+Prompt: “Write something with AI.”
+
+H. Strong Example
+Prompt: “Write a SaaS landing page headline for a tool that helps marketing teams create content faster.”
+
+---------------------------------------------------------------------
+
+SECTION: Overview
+
+A. User Question
+“What is this tool and why does it matter?”
+
+B. Allowed Evidence
+Product description
+Workflow patterns
+Recurring signals
+Market positioning
+
+C. Inclusion Threshold
+Overview must explain:
+1. What the tool does
+2. How users actually use it
+3. What it is known for
+4. How it compares to general AI tools
+
+D. Exclude
+Marketing slogans
+Feature lists
+Exaggerated claims
+
+E. Writing Rules
+Neutral tone
+Evidence-aware
+No hype
+
+F. Maximum Length
+80–150 words
+
+G. Weak Example
+“Jasper is a powerful AI writing tool used by many businesses.”
+
+H. Strong Example
+“Jasper AI is a marketing-focused writing platform designed to help teams generate blog posts, ad copy, and campaign content quickly using structured templates and brand voice controls.”
+
+---------------------------------------------------------------------
+
+Editorial Rule of Thumb
+
+If removing a sentence does not weaken the reader’s ability to decide whether they should use the tool, that sentence should not be included.
