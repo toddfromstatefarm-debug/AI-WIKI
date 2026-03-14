@@ -1,0 +1,15 @@
+<div class="verdict-box">
+  <h2>Quick Verdict</h2>
+  <p>Confidence: {{ page.verdict_confidence | default: 'medium' | capitalize }}</p>
+  <ul class="quick-pros">
+    {% for pro in page.quick_pros %}
+      <li>{{ pro }}</li>
+    {% endfor %}
+  </ul>
+  <ul class="quick-cons">
+    {% for con in page.quick_cons %}
+      <li>{{ con }}</li>
+    {% endfor %}
+  </ul>
+  <p><a href="{{ page.affiliate_link }}" target="_blank" rel="nofollow">Try {{ page.tool_name }} (affiliate link)</a></p>
+</div>

@@ -1,0 +1,13 @@
+title: AI Decision Hub
+description: Evidence-based guide to AI tools
+baseurl: ""
+url: ""
+
+theme: minima
+plugins:
+  - jekyll-feed
+
+minima:
+  skin: dark
+
+markdown: kramdown
