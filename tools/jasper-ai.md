@@ -60,6 +60,11 @@ workflow_insights:
     - "Templates speed up structured tasks like ad copy and blog outlines, but they can feel restrictive when the content needs a more custom or original angle."
     - "Integrations and workflow tools make repeat marketing tasks easier, but the editing phase often exposes weak phrasing or generic output that still needs cleanup."
     - "Brand voice setup helps with consistency, but getting the tone to feel natural can take more revision than users expect."
+signal_sources:
+  categories:
+    - Product review platforms
+    - Marketing and SaaS analysis blogs
+    - User discussions and case studies
 ---
 
 Jasper AI is a specialized content-generation tool built primarily for marketing copy, ad text, blog outlines, and short-form social content. It uses templates and brand-voice settings to guide output, allowing users to generate drafts quickly within structured workflows.

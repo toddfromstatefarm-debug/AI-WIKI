@@ -1,0 +1,17 @@
+<section class="signal-sources">
+  <h2>Signal Sources</h2>
+
+  <p class="signal-sources-intro">
+    Recurring user signals summarized from public discussions and reviews across:
+  </p>
+
+  <ul class="signal-sources-list">
+    {% for category in page.signal_sources.categories %}
+      <li>{{ category }}</li>
+    {% endfor %}
+  </ul>
+
+  <p class="signal-sources-note">
+    Patterns reflect repeated feedback trends rather than individual opinions. Confidence reflects how consistently these signals appear across sources.
+  </p>
+</section>
