@@ -2,29 +2,46 @@
 layout: default
 ---
 <article class="tool-page">
-  {% if page.logo_url %}
+  {% if page.logo_url and page.logo_url != "" %}
     <img src="{{ page.logo_url | relative_url }}" alt="{{ page.tool_name }} logo" style="max-width: 150px; margin-bottom: 1rem;">
   {% endif %}
+
   <h1>{{ page.tool_name }}</h1>
-  <p>{{ page.tagline }}</p>
-  {% include verdict-box.html %}
+
+  {% if page.tagline and page.tagline != "" %}
+    <p>{{ page.tagline }}</p>
+  {% endif %}
+
+  {% assign has_quick_pros = page.quick_pros | size %}
+  {% assign has_quick_cons = page.quick_cons | size %}
+  {% if page.verdict_confidence != "" or has_quick_pros > 0 or has_quick_cons > 0 or page.affiliate_link != "" %}
+    {% include verdict-box.html %}
+  {% endif %}
+
   {% if page.signal_sources and page.signal_sources.categories and page.signal_sources.categories.size > 0 %}
     {% include signal-sources.html %}
   {% endif %}
-  {% if page.recurring_signals %}
+
+  {% if page.recurring_signals and page.recurring_signals.size > 0 %}
     {% include recurring-signals.html %}
   {% endif %}
+
   {% if page.best_fit and page.best_fit.size > 0 and page.not_ideal_for and page.not_ideal_for.size > 0 %}
     {% include best-fit.html %}
   {% endif %}
+
   {% if page.typical_alternatives and page.typical_alternatives.size > 0 %}
     {% include typical-alternatives.html %}
   {% endif %}
-  {% if page.workflow_insights %}
+
+  {% assign has_tradeoffs = page.workflow_insights.tradeoffs | size %}
+  {% if page.workflow_insights and (page.workflow_insights.narrative != "" or has_tradeoffs > 0) %}
     {% include inside-workflow.html %}
   {% endif %}
-  {% if page.illustrative_output and page.illustrative_output.prompt and page.illustrative_output.sample_output and page.illustrative_output.interpretation %}
+
+  {% if page.illustrative_output and page.illustrative_output.prompt and page.illustrative_output.prompt != "" and page.illustrative_output.sample_output and page.illustrative_output.sample_output != "" and page.illustrative_output.interpretation and page.illustrative_output.interpretation != "" %}
     {% include illustrative-output.html %}
   {% endif %}
+
   {{ content }}
 </article>
