@@ -1,7 +1,7 @@
 title: AI Decision Hub
 description: Evidence-based guide to AI tools
-baseurl: ""
-url: ""
+baseurl: "/AI-WIKI"
+url: "https://toddfromstatefarm-debug.github.io"
 
 theme: minima
 plugins:
