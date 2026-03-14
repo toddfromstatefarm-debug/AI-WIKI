@@ -1,0 +1,17 @@
+<section class="typical-alternatives">
+  <h2>Typical Alternatives</h2>
+
+  <p class="typical-alternatives-intro">
+    Tools users would most likely compare against Jasper when deciding between structured marketing workflows and more flexible AI writing options.
+  </p>
+
+  <div class="typical-alternatives-list">
+    {% for alt in page.typical_alternatives %}
+      <div class="typical-alternative-item">
+        <h3>{{ alt.name }}</h3>
+        <p class="typical-alternative-difference">{{ alt.difference }}</p>
+        <p class="typical-alternative-best-for">{{ alt.best_for }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>

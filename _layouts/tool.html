@@ -14,6 +14,9 @@ layout: default
   {% if page.recurring_signals %}
     {% include recurring-signals.html %}
   {% endif %}
+  {% if page.typical_alternatives and page.typical_alternatives.size > 0 %}
+    {% include typical-alternatives.html %}
+  {% endif %}
   {% if page.workflow_insights %}
     {% include inside-workflow.html %}
   {% endif %}

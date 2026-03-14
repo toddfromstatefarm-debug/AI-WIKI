@@ -269,3 +269,43 @@ ul li a:hover { text-decoration: underline; }
   opacity: 0.92;
 }
 
+
+.typical-alternatives {
+  margin: 2rem 0;
+}
+
+.typical-alternatives-intro {
+  margin: 0 0 1rem;
+  color: #cfcfcf;
+}
+
+.typical-alternatives-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.typical-alternative-item {
+  padding: 1rem 1.25rem;
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+}
+
+.typical-alternative-item h3 {
+  margin: 0 0 0.45rem;
+}
+
+.typical-alternative-difference,
+.typical-alternative-best-for {
+  margin: 0;
+  color: #cfcfcf;
+}
+
+.typical-alternative-difference + .typical-alternative-best-for {
+  margin-top: 0.5rem;
+}
+
+.typical-alternative-best-for {
+  opacity: 0.92;
+}
+
