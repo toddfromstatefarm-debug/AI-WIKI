@@ -56,4 +56,8 @@ recurring_signals:
     fit_implication: "Stronger fit for teams scaling content than budget-conscious individuals or casual users"
 ---
 
-Overview coming in Phase 2. Verdict box should render above.
+Jasper AI is a specialized content-generation tool built primarily for marketing copy, ad text, blog outlines, and short-form social content. It uses templates and brand-voice settings to guide output, allowing users to generate drafts quickly within structured workflows.
+
+It is best known for speed and ease in producing marketing-first copy at scale, especially when teams need a consistent tone across many pieces. Unlike more general-purpose AI tools such as ChatGPT, Claude, or Gemini, Jasper is built around marketing and content workflows rather than broad conversational use, with templates and integrations intended to reduce setup time for those specific tasks.
+
+The Quick Verdict and Recurring User Signals reflect the pattern that shows up across user feedback: strong praise for speed and template-driven workflows when the tool matches marketing needs, but repeated complaints about generic or robotic output that still requires editing, especially from users who expect strong first-draft precision.
