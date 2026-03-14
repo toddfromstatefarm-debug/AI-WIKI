@@ -1,0 +1,23 @@
+<section class="best-fit-section">
+  <h2>Best Fit / Not Ideal For</h2>
+
+  <div class="best-fit-grid">
+    <div class="best-fit-card">
+      <h3>Best Fit</h3>
+      <ul>
+        {% for item in page.best_fit %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="best-fit-card">
+      <h3>Not Ideal For</h3>
+      <ul>
+        {% for item in page.not_ideal_for %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

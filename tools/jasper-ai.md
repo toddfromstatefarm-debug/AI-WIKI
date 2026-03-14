@@ -54,6 +54,14 @@ recurring_signals:
         link: "https://firebearstudio.com/blog/jasper-ai-review.html"
     disagreement: "Teams see strong ROI; solo users question value"
     fit_implication: "Stronger fit for teams scaling content than budget-conscious individuals or casual users"
+best_fit:
+  - Marketing teams producing repeatable content at scale
+  - Users who want templates and brand-voice controls
+  - Teams prioritizing workflow structure over maximum flexibility
+not_ideal_for:
+  - Solo users looking for the best value from a general-purpose AI tool
+  - Writing tasks that require heavy research or technical precision
+  - People expecting first-draft output to be fully publish-ready
 workflow_insights:
   narrative: "Once inside Jasper, the workflow usually starts with choosing a template or command, entering prompts or keywords, and generating a draft that can be revised quickly. The interface is built around speed and repetition, with brand voice and structured templates helping teams move through marketing tasks faster, but the process often turns into generate, edit, and refine rather than one-click publish."
   tradeoffs:
@@ -62,7 +70,7 @@ workflow_insights:
     - "Brand voice setup helps with consistency, but getting the tone to feel natural can take more revision than users expect."
 signal_sources:
   categories:
-    - Product review platforms
+    - Product review platforms (G2, Trustpilot, TrustRadius)
     - Marketing and SaaS analysis blogs
     - User discussions and case studies
 typical_alternatives:
