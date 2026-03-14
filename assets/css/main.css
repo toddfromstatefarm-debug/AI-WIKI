@@ -431,3 +431,40 @@ ul li a:hover { text-decoration: underline; }
   }
 }
 
+
+.best-fit-section {
+  margin: 2rem 0;
+}
+
+.best-fit-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.best-fit-card {
+  padding: 1rem 1.25rem;
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+}
+
+.best-fit-card h3 {
+  margin: 0 0 0.75rem;
+}
+
+.best-fit-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.best-fit-card li {
+  margin: 0.4rem 0;
+  color: #cfcfcf;
+}
+
+@media (max-width: 700px) {
+  .best-fit-grid {
+    grid-template-columns: 1fr;
+  }
+}
