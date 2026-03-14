@@ -1,5 +1,8 @@
 ---
 layout: tool
+title: "Jasper AI"
+permalink: /tools/jasper-ai/
+
 tool_name: "Jasper AI"
 tagline: "AI-powered content creation for marketing and copywriting"
 
@@ -33,7 +36,6 @@ quick_cons:
   - "Mixed support experiences"
 
 verdict_confidence: "medium"
-
 affiliate_link: "https://jasper.ai?ref=youraffiliate"
 
 ---
