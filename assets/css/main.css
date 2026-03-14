@@ -235,3 +235,37 @@ ul li a:hover { text-decoration: underline; }
   opacity: 0.92;
 }
 
+
+.signal-sources {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+}
+
+.signal-sources h2 {
+  margin: 0 0 0.75rem;
+}
+
+.signal-sources-intro,
+.signal-sources-note {
+  margin: 0;
+  color: #cfcfcf;
+}
+
+.signal-sources-list {
+  margin: 0.85rem 0;
+  padding-left: 1.25rem;
+}
+
+.signal-sources-list li {
+  margin: 0.35rem 0;
+}
+
+.signal-sources-note {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
