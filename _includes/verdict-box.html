@@ -1,6 +1,7 @@
 <div class="verdict-box">
   <h2>Quick Verdict</h2>
-  <p>Confidence: {{ page.verdict_confidence | default: 'medium' | capitalize }}</p>
+  <p class="verdict-confidence">Confidence: {{ page.verdict_confidence | default: 'medium' | capitalize }}</p>
+  <p class="verdict-confidence-note">Confidence reflects how consistently the strongest patterns appear across sources.</p>
 
   <ul class="quick-pros">
     {% for pro in page.quick_pros %}

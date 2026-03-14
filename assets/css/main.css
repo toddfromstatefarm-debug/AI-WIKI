@@ -349,3 +349,16 @@ ul li a:hover { text-decoration: underline; }
   opacity: 0.92;
 }
 
+
+.verdict-confidence {
+  margin-bottom: 0.35rem;
+}
+
+.verdict-confidence-note {
+  margin: 0 0 1rem;
+  color: #cfcfcf;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
