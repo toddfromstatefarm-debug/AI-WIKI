@@ -8,5 +8,8 @@ layout: default
   <h1>{{ page.tool_name }}</h1>
   <p>{{ page.tagline }}</p>
   {% include verdict-box.html %}
+  {% if page.recurring_signals %}
+    {% include recurring-signals.html %}
+  {% endif %}
   {{ content }}
 </article>

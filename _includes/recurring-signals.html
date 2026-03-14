@@ -1,0 +1,55 @@
+<section class="recurring-signals">
+  <h2>Recurring User Signals</h2>
+
+  <div class="signals-grid">
+    <div class="praise-column">
+      <h3>Praise Patterns</h3>
+      {% for signal in page.recurring_signals %}
+        <div class="signal-card">
+          <h4>{{ signal.theme }} ({{ signal.descriptor }})</h4>
+          <ul>
+            {% for quote in signal.praise_quotes %}
+              <li>"{{ quote.text }}" — <a href="{{ quote.link }}" target="_blank" rel="noopener">{{ quote.source }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="critique-column">
+      <h3>Critique Patterns</h3>
+      {% for signal in page.recurring_signals %}
+        <div class="signal-card">
+          <h4>{{ signal.theme }} ({{ signal.descriptor }})</h4>
+          <ul>
+            {% for quote in signal.critique_quotes %}
+              <li>"{{ quote.text }}" — <a href="{{ quote.link }}" target="_blank" rel="noopener">{{ quote.source }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="disagreement-section">
+    <h3>Where Users Disagree</h3>
+    <ul>
+      {% for signal in page.recurring_signals %}
+        {% if signal.disagreement %}
+          <li>{{ signal.disagreement }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="fit-section">
+    <h3>What This Means for Fit</h3>
+    <ul>
+      {% for signal in page.recurring_signals %}
+        {% if signal.fit_implication %}
+          <li>{{ signal.fit_implication }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</section>

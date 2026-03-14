@@ -108,3 +108,62 @@ ul li a { color: #00ffaa; text-decoration: none; }
 ul li a:hover { text-decoration: underline; }
 .tool-page { max-width: 800px; margin: 0 auto; }
 
+
+.recurring-signals {
+  margin: 2rem 0;
+}
+
+.signals-grid {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.praise-column, .critique-column {
+  flex: 1;
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.praise-column h3 { color: #00ffaa; }
+.critique-column h3 { color: #ff5555; }
+
+.signal-card {
+  margin-bottom: 1.5rem;
+}
+
+.signal-card h4 {
+  margin-bottom: 0.5rem;
+}
+
+.signal-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.signal-card li {
+  margin: 0.5rem 0;
+}
+
+.disagreement-section, .fit-section {
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.disagreement-section h3, .fit-section h3 { color: #ffaa00; }
+
+.disagreement-section ul,
+.fit-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.disagreement-section li,
+.fit-section li {
+  margin: 0.5rem 0;
+}
+
