@@ -1,7 +1,7 @@
 ---
 layout: tool
 title: "Jasper AI"
-permalink: /tools/jasper-ai/
+permalink: /tools/jasper-ai.html
 
 tool_name: "Jasper AI"
 tagline: "AI-powered content creation for marketing and copywriting"
