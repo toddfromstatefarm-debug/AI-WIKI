@@ -2,7 +2,6 @@
 layout: tool
 tool_name: "Jasper AI"
 tagline: "AI-powered content creation for marketing and copywriting"
-logo_url: "/assets/images/tools/jasper-ai/logo.jpg"
 pricing_tiers:
   - tier: "Pro"
     price: "$69/mo (monthly) or $59/mo (yearly)"
