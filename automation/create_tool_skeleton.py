@@ -1,23 +1,4 @@
 #!/usr/bin/env python3
-"""
-Create a new tool page skeleton using the current Jasper-based schema.
-
-Also appends the tool to directory.md if an entry does not already exist.
-
-Usage:
-    python automation/create_tool_skeleton.py --tool-name "Writesonic" --slug "writesonic"
-
-Optional:
-    python automation/create_tool_skeleton.py \
-        --tool-name "Writesonic" \
-        --slug "writesonic" \
-        --tagline "AI writing and marketing content platform" \
-        --official-url "https://writesonic.com/" \
-        --monetization-type "official-link-only" \
-        --affiliate-link "https://writesonic.com/" \
-        --force
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -31,42 +12,17 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Create a new tool page skeleton, image folder, and directory entry."
     )
-    parser.add_argument(
-        "--tool-name",
-        required=True,
-        help='Public tool name, e.g. "Writesonic"',
-    )
-    parser.add_argument(
-        "--slug",
-        required=True,
-        help='URL/file slug, e.g. "writesonic"',
-    )
-    parser.add_argument(
-        "--tagline",
-        default="",
-        help="Optional one-line tagline",
-    )
-    parser.add_argument(
-        "--official-url",
-        default="",
-        help="Optional official product URL",
-    )
+    parser.add_argument("--tool-name", required=True)
+    parser.add_argument("--slug", required=True)
+    parser.add_argument("--tagline", default="")
+    parser.add_argument("--official-url", default="")
     parser.add_argument(
         "--monetization-type",
         default="",
         choices=["", "affiliate", "partner", "official-link-only", "none"],
-        help='Optional monetization type: "", affiliate, partner, official-link-only, none',
     )
-    parser.add_argument(
-        "--affiliate-link",
-        default="",
-        help="Optional affiliate or official CTA URL",
-    )
-    parser.add_argument(
-        "--force",
-        action="store_true",
-        help="Overwrite existing tool markdown file if it already exists",
-    )
+    parser.add_argument("--affiliate-link", default="")
+    parser.add_argument("--force", action="store_true")
     return parser
 
 
@@ -79,17 +35,11 @@ def validate_slug(slug: str) -> bool:
     return re.fullmatch(r"[a-z0-9-]+", slug) is not None
 
 
-def resolve_affiliate_link(
-    affiliate_link: str,
-    official_url: str,
-    monetization_type: str,
-) -> str:
+def resolve_affiliate_link(affiliate_link: str, official_url: str, monetization_type: str) -> str:
     if affiliate_link.strip():
         return affiliate_link.strip()
-
     if monetization_type == "official-link-only" and official_url.strip():
         return official_url.strip()
-
     return ""
 
 
@@ -148,10 +98,7 @@ def main() -> int:
     args = build_parser().parse_args()
 
     if not validate_slug(args.slug):
-        print(
-            "Error: slug must contain only lowercase letters, numbers, and hyphens.",
-            file=sys.stderr,
-        )
+        print("Error: slug must contain only lowercase letters, numbers, and hyphens.", file=sys.stderr)
         return 1
 
     repo_root = Path.cwd()
@@ -161,24 +108,15 @@ def main() -> int:
     directory_file = repo_root / "directory.md"
 
     if not tools_dir.exists():
-        print(
-            f"Error: expected tools directory at {tools_dir} but it does not exist.",
-            file=sys.stderr,
-        )
+        print(f"Error: expected tools directory at {tools_dir} but it does not exist.", file=sys.stderr)
         return 1
 
     if not directory_file.exists():
-        print(
-            f"Error: expected directory file at {directory_file} but it does not exist.",
-            file=sys.stderr,
-        )
+        print(f"Error: expected directory file at {directory_file} but it does not exist.", file=sys.stderr)
         return 1
 
     if tool_file.exists() and not args.force:
-        print(
-            f"Error: {tool_file} already exists. Use --force to overwrite it.",
-            file=sys.stderr,
-        )
+        print(f"Error: {tool_file} already exists. Use --force to overwrite it.", file=sys.stderr)
         return 1
 
     resolved_affiliate_link = resolve_affiliate_link(
@@ -188,10 +126,7 @@ def main() -> int:
     )
 
     if args.monetization_type == "affiliate" and not resolved_affiliate_link:
-        print(
-            "Warning: monetization_type is affiliate but no affiliate_link was provided.",
-            file=sys.stderr,
-        )
+        print("Warning: monetization_type is affiliate but no affiliate_link was provided.", file=sys.stderr)
 
     today = date.today().isoformat()
 
@@ -218,9 +153,9 @@ def main() -> int:
         )
         content = directory_text.rstrip()
         if content:
-            content += "`n" + entry + "`n"
+            content += "\n" + entry + "\n"
         else:
-            content = entry + "`n"
+            content = entry + "\n"
         directory_file.write_text(content, encoding="utf-8", newline="\n")
         directory_updated = True
 
