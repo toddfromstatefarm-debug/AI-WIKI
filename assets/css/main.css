@@ -23,32 +23,6 @@ header {
   border-bottom: 1px solid #2a2a2a;
 }
 
-header nav {
-  background: #1b1b1b;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.25rem;
-  margin: 0;
-  padding: 0;
-}
-
-header a {
-  color: #00ffaa;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-header a:hover {
-  color: #7dffda;
-}
-
 main {
   width: 100%;
   max-width: 900px;
@@ -101,8 +75,9 @@ footer {
   background: #1e1e1e;
   border: 1px solid #00ffaa;
   padding: 1.5rem;
-  margin: 1.5rem 0 2rem 0;
-  border-radius: 10px;
+  margin: 2rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 255, 170, 0.1);
 }
 
 .quick-pros,
@@ -112,10 +87,15 @@ footer {
 
 .quick-pros li {
   color: #00ffaa;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0;
 }
 
 .quick-cons li {
-  color: #ff6b6b;
-  margin-bottom: 0.5rem;
+  color: #ff5555;
+  margin: 0.5rem 0;
+}
+
+a[href*="affiliate"] {
+  color: #00ffaa;
+  font-weight: bold;
 }

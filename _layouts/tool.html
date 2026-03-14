@@ -2,8 +2,15 @@
 layout: default
 ---
 <article class="tool-page">
-  <h1>{{ page.tool_name }}</h1>
+  <h1>{{ page.title }}</h1>
+
+  {% if page.logo_url %}
+    <img src="{{ page.logo_url | relative_url }}" alt="{{ page.tool_name }} logo" style="max-width: 150px; margin-bottom: 1rem;">
+  {% endif %}
+
   <p>{{ page.tagline }}</p>
+
   {% include verdict-box.html %}
-  {{ content }}
+
+  {{ content | markdownify }}
 </article>
