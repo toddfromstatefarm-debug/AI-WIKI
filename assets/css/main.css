@@ -167,3 +167,37 @@ ul li a:hover { text-decoration: underline; }
   margin: 0.5rem 0;
 }
 
+
+.inside-workflow {
+  margin: 2rem 0;
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.inside-workflow h2 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.inside-workflow h3 {
+  color: #ffaa00;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.inside-workflow p {
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+.inside-workflow ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.inside-workflow li {
+  margin: 0.5rem 0;
+  color: #cccccc;
+}
+

@@ -11,5 +11,8 @@ layout: default
   {% if page.recurring_signals %}
     {% include recurring-signals.html %}
   {% endif %}
+  {% if page.workflow_insights %}
+    {% include inside-workflow.html %}
+  {% endif %}
   {{ content }}
 </article>

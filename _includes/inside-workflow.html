@@ -1,0 +1,11 @@
+<section class="inside-workflow">
+  <h2>Inside the Workflow</h2>
+  <p>{{ page.workflow_insights.narrative }}</p>
+
+  <h3>Tradeoffs</h3>
+  <ul>
+    {% for tradeoff in page.workflow_insights.tradeoffs %}
+      <li>{{ tradeoff }}</li>
+    {% endfor %}
+  </ul>
+</section>
