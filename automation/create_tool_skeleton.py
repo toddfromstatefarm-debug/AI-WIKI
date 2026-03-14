@@ -2,6 +2,8 @@
 """
 Create a new tool page skeleton using the current Jasper-based schema.
 
+Also appends the tool to directory.md if an entry does not already exist.
+
 Usage:
     python automation/create_tool_skeleton.py --tool-name "Writesonic" --slug "writesonic"
 
@@ -27,7 +29,7 @@ from pathlib import Path
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Create a new tool page skeleton and image folder."
+        description="Create a new tool page skeleton, image folder, and directory entry."
     )
     parser.add_argument(
         "--tool-name",
@@ -129,6 +131,19 @@ def build_markdown(
     return "\n".join(lines)
 
 
+def build_directory_entry(tool_name: str, slug: str, tagline: str) -> str:
+    link = f"- [{tool_name}]({{{{ '/tools/{slug}.html' | relative_url }}}})"
+    cleaned_tagline = tagline.strip()
+    if cleaned_tagline:
+        return f"{link} – {cleaned_tagline}"
+    return link
+
+
+def directory_entry_exists(directory_text: str, slug: str) -> bool:
+    target = f"{{{{ '/tools/{slug}.html' | relative_url }}}}"
+    return target in directory_text
+
+
 def main() -> int:
     args = build_parser().parse_args()
 
@@ -143,10 +158,18 @@ def main() -> int:
     tools_dir = repo_root / "tools"
     assets_dir = repo_root / "assets" / "images" / "tools" / args.slug
     tool_file = tools_dir / f"{args.slug}.md"
+    directory_file = repo_root / "directory.md"
 
     if not tools_dir.exists():
         print(
             f"Error: expected tools directory at {tools_dir} but it does not exist.",
+            file=sys.stderr,
+        )
+        return 1
+
+    if not directory_file.exists():
+        print(
+            f"Error: expected directory file at {directory_file} but it does not exist.",
             file=sys.stderr,
         )
         return 1
@@ -184,8 +207,29 @@ def main() -> int:
     assets_dir.mkdir(parents=True, exist_ok=True)
     tool_file.write_text(markdown, encoding="utf-8", newline="\n")
 
+    directory_text = directory_file.read_text(encoding="utf-8")
+    directory_updated = False
+
+    if not directory_entry_exists(directory_text, args.slug.strip()):
+        entry = build_directory_entry(
+            tool_name=args.tool_name.strip(),
+            slug=args.slug.strip(),
+            tagline=args.tagline.strip(),
+        )
+        content = directory_text.rstrip()
+        if content:
+            content += "`n" + entry + "`n"
+        else:
+            content = entry + "`n"
+        directory_file.write_text(content, encoding="utf-8", newline="\n")
+        directory_updated = True
+
     print(f"Created: {tool_file}")
     print(f"Created folder: {assets_dir}")
+    if directory_updated:
+        print(f"Appended directory entry to: {directory_file}")
+    else:
+        print(f"Directory entry already exists in: {directory_file}")
 
     return 0
 
