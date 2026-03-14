@@ -75,6 +75,10 @@ typical_alternatives:
   - name: Copy.ai
     difference: More streamlined than Jasper for quick copy generation and lighter go-to-market workflows, but less centered on Jasper’s heavier content and brand-voice structure.
     best_for: Best for users who want faster copy ideation and a simpler writing workflow without committing to a more structured content platform.
+illustrative_output:
+  prompt: Write a SaaS landing page headline for a tool that helps marketing teams create content faster.
+  sample_output: Turn Your Marketing Team Into a Content Engine.
+  interpretation: Shows the kind of fast, marketing-oriented copy Jasper is often used for. In practice, teams typically refine wording for specificity, positioning, and brand fit before publishing.
 ---
 
 ## Overview

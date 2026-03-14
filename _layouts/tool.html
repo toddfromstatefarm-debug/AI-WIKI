@@ -20,5 +20,8 @@ layout: default
   {% if page.workflow_insights %}
     {% include inside-workflow.html %}
   {% endif %}
+  {% if page.illustrative_output and page.illustrative_output.prompt and page.illustrative_output.sample_output and page.illustrative_output.interpretation %}
+    {% include illustrative-output.html %}
+  {% endif %}
   {{ content }}
 </article>
