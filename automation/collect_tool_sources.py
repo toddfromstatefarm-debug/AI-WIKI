@@ -337,13 +337,22 @@ def strip_tags(text: str) -> str:
 
 
 def parse_duckduckgo_results(html_text: str, max_results: int) -> list[dict[str, str]]:
-    """Updated 2026 parser for html.duckduckgo.com (more flexible patterns)."""
+    """2026-robust parser targeting real result cards only (.result__title + .result__a)."""
     patterns = [
-        re.compile(r'<a[^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>', re.I | re.S),
-        re.compile(r'<a[^>]*href=["'']([^"'']+)["''][^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*>(.*?)</a>', re.I | re.S),
-        re.compile(r'<h2[^>]*class=["'']result__title["''][^>]*>.*?<a[^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>', re.I | re.S),
-        re.compile(r'<div[^>]*class=["'']result__title["''][^>]*>.*?<a[^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>', re.I | re.S),
-        re.compile(r'<a[^>]*href=["''](/l/[^"'']+|https?://[^"'']+)["''][^>]*>(.*?)</a>', re.I | re.S),
+        re.compile(
+            r'<h2[^>]*class=["''][^"'']*result__title[^"'']*["''][^>]*>.*?'
+            r'<a[^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>',
+            re.I | re.S
+        ),
+        re.compile(
+            r'<h2[^>]*class=["''][^"'']*result__title[^"'']*["''][^>]*>.*?'
+            r'<a[^>]*href=["'']([^"'']+)["''][^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*>(.*?)</a>',
+            re.I | re.S
+        ),
+        re.compile(
+            r'<a[^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>',
+            re.I | re.S
+        ),
     ]
 
     matches: list[tuple[str, str]] = []
@@ -358,16 +367,24 @@ def parse_duckduckgo_results(html_text: str, max_results: int) -> list[dict[str,
         resolved = decode_duckduckgo_redirect(html.unescape(href))
         if not resolved.startswith(("http", "//")):
             continue
+
         url = canonicalize_url(resolved if resolved.startswith("http") else "https:" + resolved)
+
+        if "duckduckgo.com" in url.lower() and "here" in raw_title.lower():
+            continue
+
         if url in seen:
             continue
         seen.add(url)
+
         title = strip_tags(raw_title).strip()
         if not title:
             title = url
+
         results.append({"url": url, "title": title})
         if len(results) >= max_results:
             break
+
     return results
 
 
@@ -636,7 +653,8 @@ def main() -> int:
         try:
             html_text = fetch_duckduckgo_html(query)
             results = parse_duckduckgo_results(html_text, query_record["max_results"])
-            time.sleep(random.uniform(1.1, 2.5))  # respect DDG + avoid rate-limits
+            print(f"DEBUG: {intent} query -> {len(results)} real results parsed (max {query_record['max_results']})")
+            time.sleep(random.uniform(1.3, 2.8))
             time.sleep(random.uniform(1.0, 2.0))
         except Exception as exc:
             warn(f"query failed for intent '{intent}': {query} ({exc})", warnings_list)
@@ -739,6 +757,9 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
 
 
 
