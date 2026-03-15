@@ -12,7 +12,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, quote_plus, urlparse
-from urllib.request import Request, urlopen`r`nfrom duckduckgo_search import DDGS
+from ddgs import DDGS
 
 
 PREFERRED_DOMAIN_TIERS = {
@@ -324,18 +324,31 @@ def build_queries(tool_name: str, official_url: str, max_results: int) -> list[d
 
 
 def fetch_search_results(query: str, max_results: int) -> list[dict[str, str]]:
-    """Uses DDGS JSON/text backend — bypasses CAPTCHA completely."""
-    try:
-        with DDGS() as ddgs:
-            results = list(ddgs.text(query.strip(), max_results=max_results))
-        return [
-            {"url": r.get("href", ""), "title": r.get("title", "")}
-            for r in results
-            if r.get("href")
-        ]
-    except Exception as exc:
-        print(f"Search backend error for '{query}': {exc}")
-        return []
+    """Uses DDGS text backend with explicit backend fallbacks."""
+    backends = ["lite", "bing", "auto"]
+    for backend in backends:
+        try:
+            with DDGS() as ddgs:
+                results = list(
+                    ddgs.text(
+                        query.strip(),
+                        region="us-en",
+                        safesearch="moderate",
+                        backend=backend,
+                        max_results=max_results,
+                    )
+                )
+            cleaned = [
+                {"url": r.get("href", ""), "title": r.get("title", "")}
+                for r in results
+                if r.get("href")
+            ]
+            print(f"DEBUG_BACKEND: backend={backend} query={query} results={len(cleaned)}")
+            if cleaned:
+                return cleaned
+        except Exception as exc:
+            print(f"Search backend error for '{query}' on backend '{backend}': {exc}")
+    return []
 
 
 def classify_source_roles(intent: str, url: str, title: str, normalized_domain: str, official_domain: str) -> list[str]:
@@ -706,6 +719,14 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+
+
+
+
+
 
 
 
