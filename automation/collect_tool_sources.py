@@ -105,7 +105,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--slug", required=True, help='URL/file slug, e.g. "notion"')
     parser.add_argument("--official-url", default="", help="Optional official product URL hint")
     parser.add_argument("--output", default="", help="Optional output path")
-    parser.add_argument("--max-results-per-query", type=int, default=3, help="Per-query result cap")
+    parser.add_argument("--max-results-per-query", type=int, default=5, help="Per-query result cap")
     parser.add_argument("--force", action="store_true", help="Overwrite existing output file")
     return parser
 
@@ -337,15 +337,13 @@ def strip_tags(text: str) -> str:
 
 
 def parse_duckduckgo_results(html_text: str, max_results: int) -> list[dict[str, str]]:
-    # More flexible patterns that handle:
-    # 1. class before/after href
-    # 2. result__a inside result__title headings
-    # 3. any /l/ or y.js redirect links as fallback
+    """Updated 2026 parser for html.duckduckgo.com (more flexible patterns)."""
     patterns = [
-        re.compile(r'<a[^>]*?\bclass=["''][^"'']*result__a[^"'']*["''][^>]*?href=["'']([^"'']+)["''][^>]*?>(.*?)</a>', re.I | re.S),
-        re.compile(r'<a[^>]*?href=["'']([^"'']+)["''][^>]*?\bclass=["''][^"'']*result__a[^"'']*["''][^>]*?>(.*?)</a>', re.I | re.S),
+        re.compile(r'<a[^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>', re.I | re.S),
+        re.compile(r'<a[^>]*href=["'']([^"'']+)["''][^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*>(.*?)</a>', re.I | re.S),
         re.compile(r'<h2[^>]*class=["'']result__title["''][^>]*>.*?<a[^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>', re.I | re.S),
-        re.compile(r'<a[^>]*href=["'']([^"'']*(?:/l/|/y\.js\?)[^"'']*)["''][^>]*>(.*?)</a>', re.I | re.S),
+        re.compile(r'<div[^>]*class=["'']result__title["''][^>]*>.*?<a[^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>', re.I | re.S),
+        re.compile(r'<a[^>]*href=["''](/l/[^"'']+|https?://[^"'']+)["''][^>]*>(.*?)</a>', re.I | re.S),
     ]
 
     matches: list[tuple[str, str]] = []
@@ -356,25 +354,20 @@ def parse_duckduckgo_results(html_text: str, max_results: int) -> list[dict[str,
 
     results: list[dict[str, str]] = []
     seen = set()
-
     for href, raw_title in matches:
         resolved = decode_duckduckgo_redirect(html.unescape(href))
         if not resolved.startswith(("http", "//")):
             continue
-
         url = canonicalize_url(resolved if resolved.startswith("http") else "https:" + resolved)
         if url in seen:
             continue
         seen.add(url)
-
-        title = strip_tags(raw_title)
-        if not title.strip():
+        title = strip_tags(raw_title).strip()
+        if not title:
             title = url
-
         results.append({"url": url, "title": title})
         if len(results) >= max_results:
             break
-
     return results
 
 
@@ -643,6 +636,7 @@ def main() -> int:
         try:
             html_text = fetch_duckduckgo_html(query)
             results = parse_duckduckgo_results(html_text, query_record["max_results"])
+            time.sleep(random.uniform(1.1, 2.5))  # respect DDG + avoid rate-limits
             time.sleep(random.uniform(1.0, 2.0))
         except Exception as exc:
             warn(f"query failed for intent '{intent}': {query} ({exc})", warnings_list)
@@ -745,6 +739,11 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+
+
 
 
 
