@@ -39,11 +39,11 @@ recurring_signals:
     descriptor: "Frequently reported"
     praise_quotes:
       - text: "Very flexible for organizing notes and docs"
-        source: "User review"
+        source: "Example review"
         link: "https://example.com/praise1"
     critique_quotes:
       - text: "Too open-ended if you want structure out of the box"
-        source: "User review"
+        source: "Example review"
         link: "https://example.com/critique1"
     disagreement: "Some users love the flexibility while others find it overwhelming without a system."
     fit_implication: "Better for users willing to design their own workspace than users wanting rigid defaults."
@@ -55,7 +55,13 @@ not_ideal_for:
   - "Users who want rigid project workflows out of the box"
   - "Teams needing advanced PM reporting by default"
   - "People who dislike open-ended setup"
-typical_alternatives: []
+typical_alternatives:
+  - name: "ClickUp"
+    difference: "More structured around task and project management than Notion’s flexible workspace model."
+    best_for: "Teams that want stronger built-in task tracking and project execution workflows."
+  - name: "Confluence"
+    difference: "More traditional as a team documentation and knowledge base tool, with less all-purpose flexibility."
+    best_for: "Organizations focused mainly on internal documentation and wiki-style collaboration."
 workflow_insights:
   narrative: "Users typically start by creating pages, nesting information, and shaping their own system for notes, docs, and internal workflows rather than following one rigid process."
   tradeoffs:
@@ -68,9 +74,3 @@ illustrative_output:
 ---
 
 <h2>Overview</h2>
-
-Notion is a flexible workspace platform used for notes, documentation, wikis, lightweight databases, and team collaboration.
-
-It is best known for letting users build their own systems rather than forcing one rigid workflow, which makes it useful for knowledge management, internal docs, and custom operating spaces.
-
-That same flexibility can also become friction when users want strong defaults or faster structure without much setup.

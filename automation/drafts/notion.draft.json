@@ -1,4 +1,5 @@
 {
+  "slug": "notion",
   "layout": "tool",
   "tool_name": "Notion",
   "tagline": "Workspace and knowledge management platform",
@@ -52,14 +53,14 @@
       "praise_quotes": [
         {
           "text": "Very flexible for organizing notes and docs",
-          "source": "User review",
+          "source": "Example review",
           "link": "https://example.com/praise1"
         }
       ],
       "critique_quotes": [
         {
           "text": "Too open-ended if you want structure out of the box",
-          "source": "User review",
+          "source": "Example review",
           "link": "https://example.com/critique1"
         }
       ],
@@ -77,7 +78,18 @@
     "Teams needing advanced PM reporting by default",
     "People who dislike open-ended setup"
   ],
-  "typical_alternatives": [],
+  "typical_alternatives": [
+    {
+      "name": "ClickUp",
+      "difference": "More structured around task and project management than Notion’s flexible workspace model.",
+      "best_for": "Teams that want stronger built-in task tracking and project execution workflows."
+    },
+    {
+      "name": "Confluence",
+      "difference": "More traditional as a team documentation and knowledge base tool, with less all-purpose flexibility.",
+      "best_for": "Organizations focused mainly on internal documentation and wiki-style collaboration."
+    }
+  ],
   "workflow_insights": {
     "narrative": "Users typically start by creating pages, nesting information, and shaping their own system for notes, docs, and internal workflows rather than following one rigid process.",
     "tradeoffs": [
@@ -90,5 +102,9 @@
     "sample_output": "Company Overview, Team Directory, Meeting Notes, Product Roadmap, SOPs, Hiring Docs.",
     "interpretation": "This reflects the kind of structured workspace planning users commonly associate with Notion, though real teams usually refine the hierarchy and naming to match their workflows."
   },
-  "overview": "Notion is a flexible workspace platform used for notes, documentation, wikis, lightweight databases, and team collaboration.\n\nIt is best known for letting users build their own systems rather than forcing one rigid workflow, which makes it useful for knowledge management, internal docs, and custom operating spaces.\n\nThat same flexibility can also become friction when users want strong defaults or faster structure without much setup."
+  "overview": [
+    "Notion is a flexible workspace platform used for notes, documentation, wikis, lightweight databases, and team collaboration.",
+    "It is best known for letting users build their own systems rather than forcing one rigid workflow, which makes it useful for knowledge management, internal docs, and custom operating spaces.",
+    "That same flexibility can also become friction when users want strong defaults or faster structure without much setup."
+  ]
 }
