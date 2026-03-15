@@ -6,6 +6,8 @@ import html
 import json
 import re
 import sys
+import time
+import random
 from copy import deepcopy
 from datetime import date
 from pathlib import Path
@@ -335,9 +337,15 @@ def strip_tags(text: str) -> str:
 
 
 def parse_duckduckgo_results(html_text: str, max_results: int) -> list[dict[str, str]]:
+    # More flexible patterns that handle:
+    # 1. class before/after href
+    # 2. result__a inside result__title headings
+    # 3. any /l/ or y.js redirect links as fallback
     patterns = [
-        re.compile(r'<a[^>]+class="[^"]*result__a[^"]*"[^>]+href="([^"]+)"[^>]*>(.*?)</a>', re.I | re.S),
-        re.compile(r'<a[^>]+href="([^"]+)"[^>]+class="[^"]*result-link[^"]*"[^>]*>(.*?)</a>', re.I | re.S),
+        re.compile(r'<a[^>]*?\bclass=["''][^"'']*result__a[^"'']*["''][^>]*?href=["'']([^"'']+)["''][^>]*?>(.*?)</a>', re.I | re.S),
+        re.compile(r'<a[^>]*?href=["'']([^"'']+)["''][^>]*?\bclass=["''][^"'']*result__a[^"'']*["''][^>]*?>(.*?)</a>', re.I | re.S),
+        re.compile(r'<h2[^>]*class=["'']result__title["''][^>]*>.*?<a[^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>', re.I | re.S),
+        re.compile(r'<a[^>]*href=["'']([^"'']*(?:/l/|/y\.js\?)[^"'']*)["''][^>]*>(.*?)</a>', re.I | re.S),
     ]
 
     matches: list[tuple[str, str]] = []
@@ -351,16 +359,16 @@ def parse_duckduckgo_results(html_text: str, max_results: int) -> list[dict[str,
 
     for href, raw_title in matches:
         resolved = decode_duckduckgo_redirect(html.unescape(href))
-        if not resolved.startswith("http"):
+        if not resolved.startswith(("http", "//")):
             continue
 
-        url = canonicalize_url(resolved)
+        url = canonicalize_url(resolved if resolved.startswith("http") else "https:" + resolved)
         if url in seen:
             continue
         seen.add(url)
 
         title = strip_tags(raw_title)
-        if not title:
+        if not title.strip():
             title = url
 
         results.append({"url": url, "title": title})
@@ -635,6 +643,7 @@ def main() -> int:
         try:
             html_text = fetch_duckduckgo_html(query)
             results = parse_duckduckgo_results(html_text, query_record["max_results"])
+            time.sleep(random.uniform(1.0, 2.0))
         except Exception as exc:
             warn(f"query failed for intent '{intent}': {query} ({exc})", warnings_list)
             continue
@@ -736,3 +745,6 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
