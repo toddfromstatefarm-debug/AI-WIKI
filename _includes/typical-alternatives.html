@@ -1,8 +1,119 @@
+{% assign has_any_praise = false %}
+{% assign has_any_critique = false %}
+{% assign has_any_disagreement = false %}
+{% assign has_any_fit = false %}
+
+{% for signal in page.recurring_signals %}
+  {% if signal.praise_quotes and signal.praise_quotes.size > 0 %}
+    {% assign has_any_praise = true %}
+  {% endif %}
+  {% if signal.critique_quotes and signal.critique_quotes.size > 0 %}
+    {% assign has_any_critique = true %}
+  {% endif %}
+  {% if signal.disagreement and signal.disagreement != "" %}
+    {% assign has_any_disagreement = true %}
+  {% endif %}
+  {% if signal.fit_implication and signal.fit_implication != "" %}
+    {% assign has_any_fit = true %}
+  {% endif %}
+{% endfor %}
+
+{% if has_any_praise or has_any_critique or has_any_disagreement or has_any_fit %}
+<section class="recurring-signals">
+  <h2>Recurring User Signals</h2>
+
+  {% if has_any_praise or has_any_critique %}
+    <div class="signals-grid">
+      {% if has_any_praise %}
+        <div class="praise-column">
+          <h3>Praise Patterns</h3>
+          {% for signal in page.recurring_signals %}
+            {% if signal.praise_quotes and signal.praise_quotes.size > 0 %}
+              <div class="signal-card">
+                <h4>{{ signal.theme }} ({{ signal.descriptor }})</h4>
+                <ul>
+                  {% for quote in signal.praise_quotes %}
+                    <li>"{{ quote.text }}" — <a href="{{ quote.link }}" target="_blank" rel="noopener">{{ quote.source }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if has_any_critique %}
+        <div class="critique-column">
+          <h3>Critique Patterns</h3>
+          {% for signal in page.recurring_signals %}
+            {% if signal.critique_quotes and signal.critique_quotes.size > 0 %}
+              <div class="signal-card">
+                <h4>{{ signal.theme }} ({{ signal.descriptor }})</h4>
+                <ul>
+                  {% for quote in signal.critique_quotes %}
+                    <li>"{{ quote.text }}" — <a href="{{ quote.link }}" target="_blank" rel="noopener">{{ quote.source }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if has_any_disagreement %}
+    <div class="disagreement-section">
+      <h3>Where Users Disagree</h3>
+      <ul>
+        {% for signal in page.recurring_signals %}
+          {% if signal.disagreement and signal.disagreement != "" %}
+            <li>{{ signal.disagreement }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if has_any_fit %}
+    <div class="fit-section">
+      <h3>What This Means for Fit</h3>
+      <ul>
+        {% for signal in page.recurring_signals %}
+          {% if signal.fit_implication and signal.fit_implication != "" %}
+            <li>{{ signal.fit_implication }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</section
+
+
+
+
+
+
+git add _includes\typical-alternatives.html _includes\inside-workflow.html _includes\recurring-signals.html
+git commit -m "Clean template debt in alternatives, workflow, and recurring signals"
+git push origin main
+
+
+
+
+git add _includes\typical-alternatives.html _includes\inside-workflow.html _includes\recurring-signals.html
+git commit -m "Clean template debt in alternatives, workflow, and recurring signals"
+git push origin main
+
+
+cd C:\Users\trist\OneDrive\Documents\GitHub\AI-WIKI
+
+@'
 <section class="typical-alternatives">
   <h2>Typical Alternatives</h2>
 
   <p class="typical-alternatives-intro">
-    Tools users would most likely compare against Jasper when deciding between structured marketing workflows and more flexible AI writing options.
+    Tools users would most likely compare against {{ page.tool_name }} when deciding between similar AI workflow options.
   </p>
 
   <div class="typical-alternatives-list">

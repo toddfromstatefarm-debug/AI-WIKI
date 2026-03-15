@@ -1,11 +1,18 @@
+{% assign has_tradeoffs = page.workflow_insights.tradeoffs | size %}
+
 <section class="inside-workflow">
   <h2>Inside the Workflow</h2>
-  <p>{{ page.workflow_insights.narrative }}</p>
 
-  <h3>Tradeoffs</h3>
-  <ul>
-    {% for tradeoff in page.workflow_insights.tradeoffs %}
-      <li>{{ tradeoff }}</li>
-    {% endfor %}
-  </ul>
+  {% if page.workflow_insights.narrative and page.workflow_insights.narrative != "" %}
+    <p>{{ page.workflow_insights.narrative }}</p>
+  {% endif %}
+
+  {% if has_tradeoffs > 0 %}
+    <h3>Tradeoffs</h3>
+    <ul>
+      {% for tradeoff in page.workflow_insights.tradeoffs %}
+        <li>{{ tradeoff }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 </section>

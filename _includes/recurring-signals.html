@@ -1,55 +1,91 @@
+{% assign has_any_praise = false %}
+{% assign has_any_critique = false %}
+{% assign has_any_disagreement = false %}
+{% assign has_any_fit = false %}
+
+{% for signal in page.recurring_signals %}
+  {% if signal.praise_quotes and signal.praise_quotes.size > 0 %}
+    {% assign has_any_praise = true %}
+  {% endif %}
+  {% if signal.critique_quotes and signal.critique_quotes.size > 0 %}
+    {% assign has_any_critique = true %}
+  {% endif %}
+  {% if signal.disagreement and signal.disagreement != "" %}
+    {% assign has_any_disagreement = true %}
+  {% endif %}
+  {% if signal.fit_implication and signal.fit_implication != "" %}
+    {% assign has_any_fit = true %}
+  {% endif %}
+{% endfor %}
+
+{% if has_any_praise or has_any_critique or has_any_disagreement or has_any_fit %}
 <section class="recurring-signals">
   <h2>Recurring User Signals</h2>
 
-  <div class="signals-grid">
-    <div class="praise-column">
-      <h3>Praise Patterns</h3>
-      {% for signal in page.recurring_signals %}
-        <div class="signal-card">
-          <h4>{{ signal.theme }} ({{ signal.descriptor }})</h4>
-          <ul>
-            {% for quote in signal.praise_quotes %}
-              <li>"{{ quote.text }}" — <a href="{{ quote.link }}" target="_blank" rel="noopener">{{ quote.source }}</a></li>
-            {% endfor %}
-          </ul>
+  {% if has_any_praise or has_any_critique %}
+    <div class="signals-grid">
+      {% if has_any_praise %}
+        <div class="praise-column">
+          <h3>Praise Patterns</h3>
+          {% for signal in page.recurring_signals %}
+            {% if signal.praise_quotes and signal.praise_quotes.size > 0 %}
+              <div class="signal-card">
+                <h4>{{ signal.theme }} ({{ signal.descriptor }})</h4>
+                <ul>
+                  {% for quote in signal.praise_quotes %}
+                    <li>"{{ quote.text }}" — <a href="{{ quote.link }}" target="_blank" rel="noopener">{{ quote.source }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
-      {% endfor %}
-    </div>
+      {% endif %}
 
-    <div class="critique-column">
-      <h3>Critique Patterns</h3>
-      {% for signal in page.recurring_signals %}
-        <div class="signal-card">
-          <h4>{{ signal.theme }} ({{ signal.descriptor }})</h4>
-          <ul>
-            {% for quote in signal.critique_quotes %}
-              <li>"{{ quote.text }}" — <a href="{{ quote.link }}" target="_blank" rel="noopener">{{ quote.source }}</a></li>
-            {% endfor %}
-          </ul>
+      {% if has_any_critique %}
+        <div class="critique-column">
+          <h3>Critique Patterns</h3>
+          {% for signal in page.recurring_signals %}
+            {% if signal.critique_quotes and signal.critique_quotes.size > 0 %}
+              <div class="signal-card">
+                <h4>{{ signal.theme }} ({{ signal.descriptor }})</h4>
+                <ul>
+                  {% for quote in signal.critique_quotes %}
+                    <li>"{{ quote.text }}" — <a href="{{ quote.link }}" target="_blank" rel="noopener">{{ quote.source }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
-      {% endfor %}
+      {% endif %}
     </div>
-  </div>
+  {% endif %}
 
-  <div class="disagreement-section">
-    <h3>Where Users Disagree</h3>
-    <ul>
-      {% for signal in page.recurring_signals %}
-        {% if signal.disagreement %}
-          <li>{{ signal.disagreement }}</li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </div>
+  {% if has_any_disagreement %}
+    <div class="disagreement-section">
+      <h3>Where Users Disagree</h3>
+      <ul>
+        {% for signal in page.recurring_signals %}
+          {% if signal.disagreement and signal.disagreement != "" %}
+            <li>{{ signal.disagreement }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 
-  <div class="fit-section">
-    <h3>What This Means for Fit</h3>
-    <ul>
-      {% for signal in page.recurring_signals %}
-        {% if signal.fit_implication %}
-          <li>{{ signal.fit_implication }}</li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </div>
+  {% if has_any_fit %}
+    <div class="fit-section">
+      <h3>What This Means for Fit</h3>
+      <ul>
+        {% for signal in page.recurring_signals %}
+          {% if signal.fit_implication and signal.fit_implication != "" %}
+            <li>{{ signal.fit_implication }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 </section>
+{% endif %}
