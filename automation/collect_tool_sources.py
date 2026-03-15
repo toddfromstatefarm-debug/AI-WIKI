@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import html
 import json
 import re
 import sys
@@ -13,7 +12,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, quote_plus, urlparse
-from urllib.request import Request, urlopen
+from urllib.request import Request, urlopen`r`nfrom duckduckgo_search import DDGS
 
 
 PREFERRED_DOMAIN_TIERS = {
@@ -324,68 +323,19 @@ def build_queries(tool_name: str, official_url: str, max_results: int) -> list[d
     return queries
 
 
-def fetch_duckduckgo_html(query: str) -> str:
-    url = f"https://html.duckduckgo.com/html/?q={quote_plus(query)}"
-    req = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(req, timeout=20) as response:
-        return response.read().decode("utf-8", errors="replace")
-
-
-def strip_tags(text: str) -> str:
-    text = re.sub(r"<.*?>", "", text, flags=re.S)
-    return html.unescape(normalize_whitespace(text))
-
-
-def parse_duckduckgo_results(html_text: str, max_results: int) -> list[dict[str, str]]:
-    """2026-robust parser targeting real result cards only (.result__title + .result__a)."""
-    patterns = [
-        re.compile(
-            r'<h2[^>]*class=["''][^"'']*result__title[^"'']*["''][^>]*>.*?'
-            r'<a[^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>',
-            re.I | re.S
-        ),
-        re.compile(
-            r'<h2[^>]*class=["''][^"'']*result__title[^"'']*["''][^>]*>.*?'
-            r'<a[^>]*href=["'']([^"'']+)["''][^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*>(.*?)</a>',
-            re.I | re.S
-        ),
-        re.compile(
-            r'<a[^>]*class=["''][^"'']*result__a[^"'']*["''][^>]*href=["'']([^"'']+)["''][^>]*>(.*?)</a>',
-            re.I | re.S
-        ),
-    ]
-
-    matches: list[tuple[str, str]] = []
-    for pattern in patterns:
-        matches = pattern.findall(html_text)
-        if matches:
-            break
-
-    results: list[dict[str, str]] = []
-    seen = set()
-    for href, raw_title in matches:
-        resolved = decode_duckduckgo_redirect(html.unescape(href))
-        if not resolved.startswith(("http", "//")):
-            continue
-
-        url = canonicalize_url(resolved if resolved.startswith("http") else "https:" + resolved)
-
-        if "duckduckgo.com" in url.lower() and "here" in raw_title.lower():
-            continue
-
-        if url in seen:
-            continue
-        seen.add(url)
-
-        title = strip_tags(raw_title).strip()
-        if not title:
-            title = url
-
-        results.append({"url": url, "title": title})
-        if len(results) >= max_results:
-            break
-
-    return results
+def fetch_search_results(query: str, max_results: int) -> list[dict[str, str]]:
+    """Uses DDGS JSON/text backend — bypasses CAPTCHA completely."""
+    try:
+        with DDGS() as ddgs:
+            results = list(ddgs.text(query.strip(), max_results=max_results))
+        return [
+            {"url": r.get("href", ""), "title": r.get("title", "")}
+            for r in results
+            if r.get("href")
+        ]
+    except Exception as exc:
+        print(f"Search backend error for '{query}': {exc}")
+        return []
 
 
 def classify_source_roles(intent: str, url: str, title: str, normalized_domain: str, official_domain: str) -> list[str]:
@@ -651,8 +601,7 @@ def main() -> int:
         intent = query_record["intent"]
 
         try:
-            html_text = fetch_duckduckgo_html(query)
-            results = parse_duckduckgo_results(html_text, query_record["max_results"])
+            results = fetch_search_results(query, query_record["max_results"])
             print(f"DEBUG: {intent} query -> {len(results)} real results parsed (max {query_record['max_results']})")
             time.sleep(random.uniform(1.3, 2.8))
             time.sleep(random.uniform(1.0, 2.0))
@@ -757,6 +706,13 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+
+
+
+
 
 
 
